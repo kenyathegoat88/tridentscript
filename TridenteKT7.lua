@@ -2,178 +2,171 @@ local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "TridenteKT7"
+local ScreenGui = Instance.new("ScreenGui", PlayerGui)
+ScreenGui.Name = "TridenteKT7_UI"
 ScreenGui.ResetOnSpawn = false
-ScreenGui.Parent = PlayerGui
 
-local Frame = Instance.new("Frame")
-Frame.Size = UDim2.new(0, 300, 0, 350)
-Frame.Position = UDim2.new(0, 20, 0, 50)
-Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Frame.BackgroundTransparency = 0.7
+local Frame = Instance.new("Frame", ScreenGui)
+Frame.Size = UDim2.new(0, 300, 0, 320)
+Frame.Position = UDim2.new(0.5, -150, 0.5, -160)
+Frame.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
+Frame.BackgroundTransparency = 0.1
 Frame.BorderSizePixel = 0
-Frame.Parent = ScreenGui
+Instance.new("UICorner", Frame).CornerRadius = UDim.new(0, 10)
 
--- Reach Input Label
-local reachLabel = Instance.new("TextLabel")
-reachLabel.Text = "Reach (1-50):"
-reachLabel.Position = UDim2.new(0, 20, 0, 20)
-reachLabel.Size = UDim2.new(0, 100, 0, 25)
-reachLabel.BackgroundTransparency = 1
-reachLabel.TextColor3 = Color3.fromRGB(20,20,20)
-reachLabel.Font = Enum.Font.Gotham
-reachLabel.TextSize = 18
-reachLabel.Parent = Frame
+local Title = Instance.new("TextLabel", Frame)
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.BackgroundTransparency = 1
+Title.Text = "Tridente KT7"
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 22
+Title.TextColor3 = Color3.fromRGB(30, 30, 30)
 
-local reachBox = Instance.new("TextBox")
-reachBox.Position = UDim2.new(0, 120, 0, 20)
-reachBox.Size = UDim2.new(0, 60, 0, 25)
-reachBox.PlaceholderText = "10"
-reachBox.Text = "10"
-reachBox.ClearTextOnFocus = false
-reachBox.Font = Enum.Font.Gotham
-reachBox.TextSize = 18
-reachBox.TextColor3 = Color3.fromRGB(20, 20, 20)
-reachBox.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-reachBox.Parent = Frame
+local Reach = Instance.new("TextBox", Frame)
+Reach.PlaceholderText = "Reach (1-50)"
+Reach.Position = UDim2.new(0.1, 0, 0, 50)
+Reach.Size = UDim2.new(0.8, 0, 0, 30)
+Reach.Font = Enum.Font.Gotham
+Reach.TextSize = 18
+Reach.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+Reach.TextColor3 = Color3.fromRGB(0, 0, 0)
+Instance.new("UICorner", Reach).CornerRadius = UDim.new(0, 6)
 
--- React Button
-local function createButton(text, posY)
-    local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(0, 260, 0, 35)
-    btn.Position = UDim2.new(0, 20, 0, posY)
-    btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-    btn.TextColor3 = Color3.new(1, 1, 1)
-    btn.Font = Enum.Font.GothamSemibold
-    btn.TextSize = 20
-    btn.Text = text
-    btn.Parent = Frame
-    return btn
-end
+local React = Instance.new("TextButton", Frame)
+React.Text = "React"
+React.Position = UDim2.new(0.1, 0, 0, 90)
+React.Size = UDim2.new(0.8, 0, 0, 30)
+React.Font = Enum.Font.GothamBold
+React.TextSize = 18
+React.BackgroundColor3 = Color3.fromRGB(50, 150, 250)
+React.TextColor3 = Color3.new(1, 1, 1)
+Instance.new("UICorner", React).CornerRadius = UDim.new(0, 6)
 
-local reactBtn = createButton("Activar React", 60)
-local reactActive = false
-reactBtn.MouseButton1Click:Connect(function()
-    reactActive = not reactActive
-    reactBtn.Text = reactActive and "Desactivar React" or "Activar React"
-    print("React está " .. (reactActive and "activado" or "desactivado"))
-end)
+local Chest = Instance.new("TextBox", Frame)
+Chest.PlaceholderText = "Chest Reach (1-50)"
+Chest.Position = UDim2.new(0.1, 0, 0, 130)
+Chest.Size = UDim2.new(0.8, 0, 0, 30)
+Chest.Font = Enum.Font.Gotham
+Chest.TextSize = 18
+Chest.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+Chest.TextColor3 = Color3.fromRGB(0, 0, 0)
+Instance.new("UICorner", Chest).CornerRadius = UDim.new(0, 6)
 
--- Chest Reach Input Label
-local chestLabel = Instance.new("TextLabel")
-chestLabel.Text = "Chest Reach (1-50):"
-chestLabel.Position = UDim2.new(0, 20, 0, 105)
-chestLabel.Size = UDim2.new(0, 140, 0, 25)
-chestLabel.BackgroundTransparency = 1
-chestLabel.TextColor3 = Color3.fromRGB(20,20,20)
-chestLabel.Font = Enum.Font.Gotham
-chestLabel.TextSize = 18
-chestLabel.Parent = Frame
+-- Toggle Hitboxes Button
+local ToggleBtn = Instance.new("TextButton", Frame)
+ToggleBtn.Text = "Ocultar Hitboxes"
+ToggleBtn.Position = UDim2.new(0.1, 0, 0, 180)
+ToggleBtn.Size = UDim2.new(0.8, 0, 0, 30)
+ToggleBtn.Font = Enum.Font.GothamBold
+ToggleBtn.TextSize = 18
+ToggleBtn.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+ToggleBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+Instance.new("UICorner", ToggleBtn).CornerRadius = UDim.new(0, 6)
 
-local chestBox = Instance.new("TextBox")
-chestBox.Position = UDim2.new(0, 160, 0, 105)
-chestBox.Size = UDim2.new(0, 60, 0, 25)
-chestBox.PlaceholderText = "10"
-chestBox.Text = "10"
-chestBox.ClearTextOnFocus = false
-chestBox.Font = Enum.Font.Gotham
-chestBox.TextSize = 18
-chestBox.TextColor3 = Color3.fromRGB(20, 20, 20)
-chestBox.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-chestBox.Parent = Frame
+-- Botones minimizar y cerrar
+local btnMin = Instance.new("TextButton", Frame)
+btnMin.Text = "_"
+btnMin.Position = UDim2.new(1, -70, 0, 5)
+btnMin.Size = UDim2.new(0, 30, 0, 25)
+btnMin.Font = Enum.Font.GothamBold
+btnMin.TextSize = 20
+btnMin.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+btnMin.TextColor3 = Color3.new(1, 1, 1)
+Instance.new("UICorner", btnMin).CornerRadius = UDim.new(0, 6)
 
--- Skybox selector
-local skyLabel = Instance.new("TextLabel")
-skyLabel.Text = "Cambiar cielo:"
-skyLabel.Position = UDim2.new(0, 20, 0, 145)
-skyLabel.Size = UDim2.new(0, 100, 0, 25)
-skyLabel.BackgroundTransparency = 1
-skyLabel.TextColor3 = Color3.fromRGB(20,20,20)
-skyLabel.Font = Enum.Font.Gotham
-skyLabel.TextSize = 18
-skyLabel.Parent = Frame
-
-local skyBox = Instance.new("TextBox")
-skyBox.Position = UDim2.new(0, 120, 0, 145)
-skyBox.Size = UDim2.new(0, 140, 0, 25)
-skyBox.PlaceholderText = "SkyboxId"
-skyBox.Text = ""
-skyBox.ClearTextOnFocus = false
-skyBox.Font = Enum.Font.Gotham
-skyBox.TextSize = 18
-skyBox.TextColor3 = Color3.fromRGB(20, 20, 20)
-skyBox.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
-skyBox.Parent = Frame
-
-local skyBtn = createButton("Cambiar Skybox", 185)
-skyBtn.MouseButton1Click:Connect(function()
-    local skyId = skyBox.Text
-    if skyId ~= "" then
-        local lighting = game:GetService("Lighting")
-        local newSky = Instance.new("Sky")
-        newSky.SkyboxBk = "rbxassetid://"..skyId
-        newSky.SkyboxDn = "rbxassetid://"..skyId
-        newSky.SkyboxFt = "rbxassetid://"..skyId
-        newSky.SkyboxLf = "rbxassetid://"..skyId
-        newSky.SkyboxRt = "rbxassetid://"..skyId
-        newSky.SkyboxUp = "rbxassetid://"..skyId
-        newSky.Parent = lighting
-        print("Skybox cambiado a "..skyId)
-    else
-        print("Ingresa un ID de Skybox válido")
-    end
-end)
-
--- Minimize and Close buttons
-local minimized = false
-
-local btnMinimize = Instance.new("TextButton")
-btnMinimize.Size = UDim2.new(0, 40, 0, 25)
-btnMinimize.Position = UDim2.new(1, -90, 0, 10)
-btnMinimize.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-btnMinimize.TextColor3 = Color3.new(1,1,1)
-btnMinimize.Font = Enum.Font.GothamBold
-btnMinimize.TextSize = 20
-btnMinimize.Text = "_"
-btnMinimize.Parent = Frame
-
-local btnClose = Instance.new("TextButton")
-btnClose.Size = UDim2.new(0, 40, 0, 25)
-btnClose.Position = UDim2.new(1, -45, 0, 10)
-btnClose.BackgroundColor3 = Color3.fromRGB(160, 40, 40)
-btnClose.TextColor3 = Color3.new(1,1,1)
+local btnClose = Instance.new("TextButton", Frame)
+btnClose.Text = "X"
+btnClose.Position = UDim2.new(1, -35, 0, 5)
+btnClose.Size = UDim2.new(0, 30, 0, 25)
 btnClose.Font = Enum.Font.GothamBold
 btnClose.TextSize = 20
-btnClose.Text = "X"
-btnClose.Parent = Frame
-
-local minimizedLabel = Instance.new("TextLabel")
-minimizedLabel.Size = UDim2.new(0, 150, 0, 30)
-minimizedLabel.Position = UDim2.new(0, 20, 0, 50)
-minimizedLabel.BackgroundTransparency = 0.7
-minimizedLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-minimizedLabel.TextColor3 = Color3.fromRGB(20, 20, 20)
-minimizedLabel.Font = Enum.Font.GothamBold
-minimizedLabel.TextSize = 22
-minimizedLabel.Text = "Tridente KT7"
-minimizedLabel.Visible = false
-minimizedLabel.Parent = ScreenGui
-
-btnMinimize.MouseButton1Click:Connect(function()
-    if minimized == false then
-        Frame.Visible = false
-        minimizedLabel.Visible = true
-        minimized = true
-    else
-        Frame.Visible = true
-        minimizedLabel.Visible = false
-        minimized = false
-    end
-end)
+btnClose.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+btnClose.TextColor3 = Color3.new(1, 1, 1)
+Instance.new("UICorner", btnClose).CornerRadius = UDim.new(0, 6)
 
 btnClose.MouseButton1Click:Connect(function()
-    ScreenGui:Destroy()
+	ScreenGui:Destroy()
 end)
 
-print("Script Tridente KT7 cargado")
+-- Botón flotante al minimizar
+local OpenBtn = Instance.new("TextButton", ScreenGui)
+OpenBtn.Size = UDim2.new(0, 130, 0, 35)
+OpenBtn.Position = UDim2.new(0, 10, 0, 10)
+OpenBtn.Text = "Tridente KT7"
+OpenBtn.Font = Enum.Font.GothamBold
+OpenBtn.TextSize = 18
+OpenBtn.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+OpenBtn.TextColor3 = Color3.fromRGB(20, 20, 20)
+Instance.new("UICorner", OpenBtn).CornerRadius = UDim.new(0, 8)
+OpenBtn.Visible = false
+
+btnMin.MouseButton1Click:Connect(function()
+	Frame.Visible = false
+	OpenBtn.Visible = true
+end)
+
+OpenBtn.MouseButton1Click:Connect(function()
+	Frame.Visible = true
+	OpenBtn.Visible = false
+end)
+
+-- Hitbox para ambas piernas
+local hitboxDer, hitboxIzq
+
+local function crearHitboxes(valor)
+	valor = tonumber(valor)
+	if not valor or valor < 1 or valor > 50 then return end
+
+	local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	local footR = char:FindFirstChild("RightFoot") or char:FindFirstChild("Right Leg") or char:FindFirstChild("RightLowerLeg")
+	local footL = char:FindFirstChild("LeftFoot") or char:FindFirstChild("Left Leg") or char:FindFirstChild("LeftLowerLeg")
+	if not footR or not footL then return end
+
+	if hitboxDer then hitboxDer:Destroy() end
+	if hitboxIzq then hitboxIzq:Destroy() end
+
+	local function crearHitbox(pierna)
+		local box = Instance.new("Part")
+		box.Size = Vector3.new(valor / 5, 0.5, valor / 5)
+		box.Shape = Enum.PartType.Block
+		box.Transparency = 0.5
+		box.CanCollide = false
+		box.Anchored = false
+		box.Color = Color3.fromRGB(0, 255, 0)
+		box.Material = Enum.Material.ForceField
+		box.Name = "Hitbox_" .. pierna.Name
+		box.Parent = char
+
+		local weld = Instance.new("WeldConstraint")
+		weld.Part0 = pierna
+		weld.Part1 = box
+		weld.Parent = box
+
+		box.CFrame = pierna.CFrame * CFrame.new(0, -0.5, 0)
+		return box
+	end
+
+	hitboxDer = crearHitbox(footR)
+	hitboxIzq = crearHitbox(footL)
+end
+
+-- Campo Reach activa hitboxes
+Reach.FocusLost:Connect(function(enterPressed)
+	if enterPressed then
+		crearHitboxes(Reach.Text)
+	end
+end)
+
+-- Toggle visibilidad de hitboxes
+local visible = true
+ToggleBtn.MouseButton1Click:Connect(function()
+	visible = not visible
+	if hitboxDer then hitboxDer.Transparency = visible and 0.5 or 1 end
+	if hitboxIzq then hitboxIzq.Transparency = visible and 0.5 or 1 end
+	ToggleBtn.Text = visible and "Ocultar Hitboxes" or "Mostrar Hitboxes"
+end)
+
+-- Función react pendiente
+React.MouseButton1Click:Connect(function()
+	warn("React activado (pendiente)")
+end)
